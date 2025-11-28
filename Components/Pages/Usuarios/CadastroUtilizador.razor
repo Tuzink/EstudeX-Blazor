@@ -1,0 +1,70 @@
+@page "/cadastro"
+
+<div class="cadastro-container">
+    <div class="cadastro-panel">
+
+        <h1 class="title">CRIAR CONTA</h1>
+
+        <EditForm Model="@model" OnValidSubmit="@Registrar">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <!-- TIPO DE UTILIZADOR -->
+            <div class="input-group">
+                <label>Tipo de Utilizador</label>
+                <InputSelect @bind-Value="model.TipoUtilizador" class="input-control">
+                    <option value="">Selecione...</option>
+                    @foreach (var tipo in TiposUtilizador)
+                    {
+                        <option value="@tipo">@tipo</option>
+                    }
+                </InputSelect>
+            </div>
+
+            <!-- NOME -->
+            <div class="input-group">
+                <label>Nome</label>
+                <InputText @bind-Value="model.Nome" class="input-control" placeholder="Digite seu nome" />
+            </div>
+
+            <!-- CPF -->
+            <div class="input-group">
+                <label>CPF</label>
+                <InputText @bind-Value="model.CPF" class="input-control" placeholder="000.000.000-00" />
+            </div>
+
+            <!-- UF -->
+            <div class="input-group">
+                <label>UF</label>
+                <InputText @bind-Value="model.UF" class="input-control" placeholder="Ex: SP" />
+            </div>
+
+            <!-- CIDADE -->
+            <div class="input-group">
+                <label>Cidade</label>
+                <InputText @bind-Value="model.Cidade" class="input-control" placeholder="Digite sua cidade" />
+            </div>
+
+            <button type="submit" class="btn-cadastro">Criar Conta</button>
+
+            <p class="return-login">
+                Já possui conta? <a href="/login">Clique aqui</a>.
+            </p>
+        </EditForm>
+
+    </div>
+</div>
+
+@code{
+    private CadastroUtilizadorModel model = new CadastroUtilizadorModel();
+
+    private async Task Registrar()
+    {
+        //lógica de cadastro
+    }
+
+    private List<string> TiposUtilizador = new ()
+    {
+        "Aluno", "Professor", "Monitor", "Coordenador", "Diretor"
+    };
+}

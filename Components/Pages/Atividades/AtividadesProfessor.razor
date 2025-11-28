@@ -1,0 +1,59 @@
+@page "/atividades/professor"
+
+<link href="css/AtividadesProfessor.css"  rel="stylesheet" />
+<div class="prof-container">
+
+    <h1 class="title">Área do Professor</h1>
+
+    <button class="btn-adicionar" @onclick="AbrirCriacao">Adicionar Nova Atividade</button>
+
+    <div class="atividades-panel">
+
+        @foreach (var atv in AtividadesPostadas)
+        {
+            <div class="atividade-card">
+
+                <h2>@atv.Titulo</h2>
+                <p>Alunos que realizaram: <b>@atv.AlunosRealizaram</b></p>
+                <p>Pendentes de correção: <b>@atv.PendentesCorrecao</b></p>
+
+                <a href="/atividades/professor/corrigir/@atv.Id" class="btn-corrigir">Corrigir</a>
+            </div>
+        }
+
+    </div>
+
+    <!-- POPUP DE CRIAR ATIVIDADE -->
+    @if (mostrarCriacao)
+    {
+        <div class="popup-bg">
+            <div class="popup">
+                <h2>Criar Nova Atividade</h2>
+
+                <EditForm Model="@novaAtividade" OnValidSubmit="@CriarAtividade">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+
+                    <div class="input-group">
+                        <label>Título</label>
+                        <InputText @bind-Value="novaAtividade.Titulo" class="input-control" />
+                    </div>
+
+                    <div class="input-group">
+                        <label>Descrição</label>
+                        <InputTextArea @bind-Value="novaAtividade.Descricao" class="input-control" />
+                    </div>
+
+                    <div class="button-row">
+                        <button type="submit" class="btn-adicionar">Salvar</button>
+                        <button type="button" @onclick="FecharCriacao" class="btn-cancelar">Cancelar</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    }
+</div>
+
+@code{
+
+}
